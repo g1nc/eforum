@@ -2,10 +2,10 @@ class CommentsController < ApplicationController
 	def create
 		@message = Message.find(params[:message_id])
 		@comment = @message.comments.create(comment_params)
-		@comment.user_id = current_user.user_id
+		@comment.user_id = current_user.id
 
 		if @comment.save
-			redirect_to message
+			redirect_to @message
 		else
 			render 'new'
 		end
